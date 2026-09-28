@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Maldonado Conecta</title>
 
 <style>
@@ -12,7 +13,7 @@
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   background: #f4f6fb;
   color: #222;
 }
@@ -20,8 +21,8 @@ body {
 header {
   background: linear-gradient(135deg, #5424a8, #1769aa);
   color: white;
-  padding: 45px 20px;
   text-align: center;
+  padding: 45px 20px;
 }
 
 header h1 {
@@ -69,7 +70,8 @@ label {
   font-weight: bold;
 }
 
-input, textarea {
+input,
+textarea {
   width: 100%;
   padding: 13px;
   margin-top: 7px;
@@ -121,8 +123,20 @@ button:hover {
 }
 
 .dato {
-  padding: 10px 0;
+  padding: 11px 0;
   border-bottom: 1px solid #eee;
+}
+
+.dato strong {
+  display: inline-block;
+  min-width: 180px;
+}
+
+.codigo {
+  font-size: 18px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  color: #5424a8;
 }
 
 .estado {
@@ -147,6 +161,12 @@ button:hover {
   border: 8px solid white;
 }
 
+.qr-error {
+  display: none;
+  color: #a00000;
+  margin-top: 10px;
+}
+
 .aviso {
   background: #fff4d6;
   color: #725500;
@@ -162,7 +182,8 @@ footer {
   color: #666;
 }
 
-@media(max-width:600px) {
+@media (max-width: 600px) {
+
   header h1 {
     font-size: 28px;
   }
@@ -174,10 +195,17 @@ footer {
   button {
     width: 100%;
   }
+
+  .dato strong {
+    display: block;
+    margin-bottom: 4px;
+  }
 }
 
 /* IMPRESIÓN */
+
 @media print {
+
   body {
     background: white;
   }
@@ -214,14 +242,22 @@ footer {
 <body>
 
 <header>
+
   <h1>🏫 Maldonado Conecta</h1>
+
   <p>Consejo Estudiantil 2026-2027</p>
+
   <p>Colegio Pedro Vicente Maldonado</p>
+
 </header>
+
 
 <div class="container">
 
+  <!-- INFORMACIÓN -->
+
   <section class="card">
+
     <h2>📅 Información</h2>
 
     <div class="info">
@@ -242,9 +278,14 @@ footer {
       </div>
 
     </div>
+
   </section>
 
+
+  <!-- PROYECTO -->
+
   <section class="card">
+
     <h2>💡 Nuestro proyecto</h2>
 
     <p>
@@ -256,207 +297,584 @@ footer {
     <p>
       El siguiente formulario genera un pase digital demostrativo.
     </p>
+
   </section>
 
+
+  <!-- FORMULARIO -->
+
   <section class="card">
+
     <h2>🎫 Generar Pase Digital</h2>
 
     <form id="formulario">
 
-      <label for="nombre">Nombre del estudiante</label>
-      <input id="nombre" type="text" required>
+      <label for="nombre">
+        Nombre del estudiante
+      </label>
 
-      <label for="curso">Curso</label>
-      <input id="curso" type="text" required>
+      <input
+        id="nombre"
+        type="text"
+        placeholder="Nombre completo"
+        required
+      >
 
-      <label for="fecha">Fecha</label>
-      <input id="fecha" type="date" required>
 
-      <label for="salida">Hora de salida</label>
-      <input id="salida" type="time" required>
+      <label for="ced">
+        Número de CED
+      </label>
 
-      <label for="regreso">Hora de regreso</label>
-      <input id="regreso" type="time" required>
+      <input
+        id="ced"
+        type="text"
+        inputmode="numeric"
+        maxlength="10"
+        placeholder="10 dígitos"
+        required
+      >
 
-      <label for="motivo">Motivo</label>
-      <textarea id="motivo" rows="3" required></textarea>
 
-      <button type="submit">✅ Generar pase</button>
+      <label for="curso">
+        Curso
+      </label>
+
+      <input
+        id="curso"
+        type="text"
+        placeholder="Ejemplo: 2do BGU A"
+        required
+      >
+
+
+      <label for="fecha">
+        Fecha
+      </label>
+
+      <input
+        id="fecha"
+        type="date"
+        required
+      >
+
+
+      <label for="salida">
+        Hora de salida
+      </label>
+
+      <input
+        id="salida"
+        type="time"
+        required
+      >
+
+
+      <label for="regreso">
+        Hora de regreso
+      </label>
+
+      <input
+        id="regreso"
+        type="time"
+        required
+      >
+
+
+      <label for="motivo">
+        Motivo
+      </label>
+
+      <textarea
+        id="motivo"
+        rows="3"
+        placeholder="Motivo de la salida"
+        required
+      ></textarea>
+
+
+      <button type="submit">
+        ✅ Generar pase
+      </button>
 
     </form>
+
   </section>
+
+
+  <!-- RESULTADO -->
 
   <section class="card" id="resultado">
 
     <div class="pase">
 
       <div class="pase-header">
+
         <h2>🎫 PASE DIGITAL</h2>
+
         <strong>MALDONADO CONECTA</strong>
-        <p>Consejo Estudiantil 2026-2027</p>
-      </div>
-
-      <div class="dato">
-        <strong>Número de pase:</strong>
-        <span id="numero"></span>
-      </div>
-
-      <div class="dato">
-        <strong>Estudiante:</strong>
-        <span id="rNombre"></span>
-      </div>
-
-      <div class="dato">
-        <strong>Curso:</strong>
-        <span id="rCurso"></span>
-      </div>
-
-      <div class="dato">
-        <strong>Fecha:</strong>
-        <span id="rFecha"></span>
-      </div>
-
-      <div class="dato">
-        <strong>Salida:</strong>
-        <span id="rSalida"></span>
-      </div>
-
-      <div class="dato">
-        <strong>Regreso:</strong>
-        <span id="rRegreso"></span>
-      </div>
-
-      <div class="dato">
-        <strong>Motivo:</strong>
-        <span id="rMotivo"></span>
-      </div>
-
-      <div class="estado">
-        🟢 PASE GENERADO — PROTOTIPO
-      </div>
-
-      <div class="qr-container">
-        <h3>📱 Código QR</h3>
-
-        <img id="codigoQR"
-             alt="Código QR del pase">
 
         <p>
-          Escanea este código para consultar los datos del pase.
+          Consejo Estudiantil 2026-2027
         </p>
+
       </div>
 
+
+      <div class="dato">
+
+        <strong>Número de pase:</strong>
+
+        <span id="numero"></span>
+
+      </div>
+
+
+      <div class="dato">
+
+        <strong>Estudiante:</strong>
+
+        <span id="rNombre"></span>
+
+      </div>
+
+
+      <div class="dato">
+
+        <strong>Número de CED:</strong>
+
+        <span id="rCed"></span>
+
+      </div>
+
+
+      <div class="dato">
+
+        <strong>Curso:</strong>
+
+        <span id="rCurso"></span>
+
+      </div>
+
+
+      <div class="dato">
+
+        <strong>Fecha:</strong>
+
+        <span id="rFecha"></span>
+
+      </div>
+
+
+      <div class="dato">
+
+        <strong>Salida:</strong>
+
+        <span id="rSalida"></span>
+
+      </div>
+
+
+      <div class="dato">
+
+        <strong>Regreso:</strong>
+
+        <span id="rRegreso"></span>
+
+      </div>
+
+
+      <div class="dato">
+
+        <strong>Motivo:</strong>
+
+        <span id="rMotivo"></span>
+
+      </div>
+
+
+      <div class="dato">
+
+        <strong>Código de verificación:</strong>
+
+        <span
+          id="codigoVerificacion"
+          class="codigo"
+        ></span>
+
+      </div>
+
+
+      <div class="estado">
+
+        🟢 PASE GENERADO — PROTOTIPO
+
+      </div>
+
+
+      <!-- QR -->
+
+      <div class="qr-container">
+
+        <h3>📱 Código QR</h3>
+
+        <img
+          id="codigoQR"
+          alt="Código QR del pase"
+        >
+
+        <p id="qrError" class="qr-error">
+          No se pudo cargar el código QR.
+          El pase sigue siendo válido como prototipo.
+        </p>
+
+        <p>
+          Escanea este código para consultar
+          los datos básicos del pase.
+        </p>
+
+      </div>
+
+
       <div class="aviso">
-        ⚠️ Este pase es únicamente un prototipo demostrativo
-        para el proyecto Maldonado Conecta.
-        No reemplaza una autorización oficial del colegio.
+
+        ⚠️ Este pase es únicamente un prototipo
+        demostrativo para el proyecto Maldonado Conecta.
+
+        No reemplaza una autorización oficial
+        del colegio ni confirma por sí solo
+        la matrícula del estudiante.
+
       </div>
 
     </div>
 
+
     <div class="no-print">
-      <button onclick="window.print()">🖨️ Imprimir pase</button>
-      <button class="secondary" onclick="nuevoPase()">🔄 Generar otro</button>
+
+      <button onclick="window.print()">
+        🖨️ Imprimir pase
+      </button>
+
+      <button
+        class="secondary"
+        onclick="nuevoPase()"
+      >
+        🔄 Generar otro
+      </button>
+
     </div>
 
   </section>
 
 </div>
 
+
 <footer>
+
   Maldonado Conecta © 2026-2027
+
 </footer>
 
+
 <script>
-const formulario = document.getElementById("formulario");
-const resultado = document.getElementById("resultado");
 
-formulario.addEventListener("submit", function(event) {
+const formulario =
+  document.getElementById("formulario");
 
-  event.preventDefault();
+const resultado =
+  document.getElementById("resultado");
 
-  const nombre = document.getElementById("nombre").value.trim();
-  const curso = document.getElementById("curso").value.trim();
-  const fecha = document.getElementById("fecha").value;
-  const salida = document.getElementById("salida").value;
-  const regreso = document.getElementById("regreso").value;
-  const motivo = document.getElementById("motivo").value.trim();
 
-  if (!nombre || !curso || !fecha || !salida || !regreso || !motivo) {
-    alert("Por favor completa todos los campos.");
-    return;
-  }
+formulario.addEventListener(
+  "submit",
+  function(event) {
 
-  const ahora = new Date();
+    event.preventDefault();
 
-  const numero =
-    "MC-" +
-    ahora.getFullYear() +
-    String(ahora.getMonth() + 1).padStart(2, "0") +
-    String(ahora.getDate()).padStart(2, "0") +
-    "-" +
-    String(ahora.getHours()).padStart(2, "0") +
-    String(ahora.getMinutes()).padStart(2, "0") +
-    String(ahora.getSeconds()).padStart(2, "0");
 
-  const fechaBonita = new Date(fecha + "T00:00:00")
-    .toLocaleDateString("es-EC", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric"
+    const nombre =
+      document.getElementById("nombre")
+      .value
+      .trim();
+
+
+    const ced =
+      document.getElementById("ced")
+      .value
+      .trim();
+
+
+    const curso =
+      document.getElementById("curso")
+      .value
+      .trim();
+
+
+    const fecha =
+      document.getElementById("fecha")
+      .value;
+
+
+    const salida =
+      document.getElementById("salida")
+      .value;
+
+
+    const regreso =
+      document.getElementById("regreso")
+      .value;
+
+
+    const motivo =
+      document.getElementById("motivo")
+      .value
+      .trim();
+
+
+    /* VALIDACIÓN */
+
+    if (
+      !nombre ||
+      !ced ||
+      !curso ||
+      !fecha ||
+      !salida ||
+      !regreso ||
+      !motivo
+    ) {
+
+      alert(
+        "Por favor completa todos los campos."
+      );
+
+      return;
+    }
+
+
+    if (!/^\d{10}$/.test(ced)) {
+
+      alert(
+        "El número de CED debe tener exactamente 10 dígitos."
+      );
+
+      return;
+    }
+
+
+    /* NÚMERO DE PASE */
+
+    const ahora = new Date();
+
+    const numero =
+      "MC-" +
+      ahora.getFullYear() +
+      String(
+        ahora.getMonth() + 1
+      ).padStart(2, "0") +
+      String(
+        ahora.getDate()
+      ).padStart(2, "0") +
+      "-" +
+      String(
+        ahora.getHours()
+      ).padStart(2, "0") +
+      String(
+        ahora.getMinutes()
+      ).padStart(2, "0") +
+      String(
+        ahora.getSeconds()
+      ).padStart(2, "0");
+
+
+    /* CÓDIGO DE VERIFICACIÓN */
+
+    const parte1 =
+      Math.random()
+      .toString(36)
+      .substring(2, 6)
+      .toUpperCase();
+
+
+    const parte2 =
+      Math.random()
+      .toString(36)
+      .substring(2, 6)
+      .toUpperCase();
+
+
+    const codigoVerificacion =
+      "MC-" +
+      parte1 +
+      "-" +
+      parte2;
+
+
+    /* FECHA */
+
+    const fechaBonita =
+      new Date(
+        fecha + "T00:00:00"
+      ).toLocaleDateString(
+        "es-EC",
+        {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        }
+      );
+
+
+    /* MOSTRAR INFORMACIÓN */
+
+    document.getElementById(
+      "numero"
+    ).textContent = numero;
+
+
+    document.getElementById(
+      "rNombre"
+    ).textContent = nombre;
+
+
+    document.getElementById(
+      "rCed"
+    ).textContent = ced;
+
+
+    document.getElementById(
+      "rCurso"
+    ).textContent = curso;
+
+
+    document.getElementById(
+      "rFecha"
+    ).textContent = fechaBonita;
+
+
+    document.getElementById(
+      "rSalida"
+    ).textContent = salida;
+
+
+    document.getElementById(
+      "rRegreso"
+    ).textContent = regreso;
+
+
+    document.getElementById(
+      "rMotivo"
+    ).textContent = motivo;
+
+
+    document.getElementById(
+      "codigoVerificacion"
+    ).textContent =
+      codigoVerificacion;
+
+
+    /*
+      Para mayor privacidad, el QR solamente
+      incluye los últimos 4 dígitos del CED.
+    */
+
+    const cedProtegido =
+      "******" +
+      ced.substring(6);
+
+
+    /* DATOS DEL QR */
+
+    const datosQR =
+      "MALDONADO CONECTA\n" +
+      "PASE: " + numero + "\n" +
+      "ESTUDIANTE: " + nombre + "\n" +
+      "CED: " + cedProtegido + "\n" +
+      "CURSO: " + curso + "\n" +
+      "FECHA: " + fechaBonita + "\n" +
+      "SALIDA: " + salida + "\n" +
+      "REGRESO: " + regreso + "\n" +
+      "MOTIVO: " + motivo + "\n" +
+      "CODIGO: " + codigoVerificacion;
+
+
+    /*
+      Generación del QR.
+      El servicio solamente se consulta
+      después de pulsar "Generar pase".
+    */
+
+    const qrURL =
+      "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
+      encodeURIComponent(datosQR);
+
+
+    const codigoQR =
+      document.getElementById(
+        "codigoQR"
+      );
+
+
+    const qrError =
+      document.getElementById(
+        "qrError"
+      );
+
+
+    qrError.style.display =
+      "none";
+
+
+    codigoQR.onload =
+      function() {
+
+        qrError.style.display =
+          "none";
+
+      };
+
+
+    codigoQR.onerror =
+      function() {
+
+        qrError.style.display =
+          "block";
+
+      };
+
+
+    codigoQR.src = qrURL;
+
+
+    /* MOSTRAR PASE */
+
+    resultado.style.display =
+      "block";
+
+
+    resultado.scrollIntoView({
+      behavior: "smooth"
     });
 
-  document.getElementById("numero").textContent = numero;
-  document.getElementById("rNombre").textContent = nombre;
-  document.getElementById("rCurso").textContent = curso;
-  document.getElementById("rFecha").textContent = fechaBonita;
-  document.getElementById("rSalida").textContent = salida;
-  document.getElementById("rRegreso").textContent = regreso;
-  document.getElementById("rMotivo").textContent = motivo;
+  }
+);
 
-  /*
-    Datos que se guardarán dentro del QR.
-  */
-  const datosQR =
-    "MALDONADO CONECTA\n" +
-    "PASE: " + numero + "\n" +
-    "ESTUDIANTE: " + nombre + "\n" +
-    "CURSO: " + curso + "\n" +
-    "FECHA: " + fechaBonita + "\n" +
-    "SALIDA: " + salida + "\n" +
-    "REGRESO: " + regreso + "\n" +
-    "MOTIVO: " + motivo;
 
-  /*
-    Generamos el QR mediante un servicio de imagen.
-    Si el servicio no carga, el resto de la página
-    sigue funcionando normalmente.
-  */
-  const qrURL =
-    "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
-    encodeURIComponent(datosQR);
-
-  document.getElementById("codigoQR").src = qrURL;
-
-  resultado.style.display = "block";
-
-  resultado.scrollIntoView({
-    behavior: "smooth"
-  });
-});
-
+/* GENERAR OTRO PASE */
 
 function nuevoPase() {
 
   formulario.reset();
 
-  resultado.style.display = "none";
+  resultado.style.display =
+    "none";
 
   window.scrollTo({
     top: 0,
     behavior: "smooth"
   });
+
 }
+
 </script>
 
 </body>
