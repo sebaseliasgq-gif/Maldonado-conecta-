@@ -3,45 +3,1020 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Maldonado Conecta - Consejo Estudiantil 2026-2027</title>
+
+<meta name="theme-color" content="#6d4aff">
+
+<title>Maldonado Conecta | Consejo Estudiantil 2026-2027</title>
+
 <style>
-body{font-family:Arial,sans-serif;margin:0;background:#eef7ff;color:#24324a}
-header{background:linear-gradient(135deg,#7b5cff,#38bdf8);color:white;text-align:center;padding:30px 18px}
-h1{margin:0;font-size:30px}.slogan{font-size:16px;margin-top:8px}
-main{max-width:850px;margin:25px auto;padding:0 16px}
-.card{background:white;border-radius:18px;padding:22px;margin:16px 0;box-shadow:0 5px 18px #0001}
-.info{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}
-.box{background:#f4f0ff;border-radius:14px;padding:18px}
-h2{color:#5b45c9}h3{margin-top:5px;color:#315a8a}
-footer{text-align:center;padding:22px;color:#64748b}
+
+/* =========================
+   CONFIGURACIÓN GENERAL
+========================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    margin:0;
+    font-family:Arial, Helvetica, sans-serif;
+    background:linear-gradient(180deg,#eef4ff,#f8fbff);
+    color:#24324a;
+    line-height:1.6;
+}
+
+/* =========================
+   ENCABEZADO
+========================= */
+
+header{
+    background:linear-gradient(135deg,#6548e8,#39bdf8);
+    color:white;
+    text-align:center;
+    padding:42px 18px 48px;
+    box-shadow:0 5px 20px rgba(0,0,0,.15);
+}
+
+.logo{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+header h1{
+    margin:0;
+    font-size:clamp(25px,6vw,38px);
+    line-height:1.2;
+}
+
+.slogan{
+    margin:12px auto 0;
+    max-width:650px;
+    font-size:16px;
+    opacity:.95;
+}
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+main{
+    width:min(900px,92%);
+    margin:28px auto;
+}
+
+/* =========================
+   TARJETAS
+========================= */
+
+.card{
+    background:white;
+    border-radius:20px;
+    padding:25px;
+    margin:20px 0;
+    box-shadow:0 8px 25px rgba(30,50,90,.10);
+    border:1px solid #e8edf7;
+}
+
+.card h2{
+    margin-top:0;
+    color:#5b45c9;
+    font-size:24px;
+}
+
+.card h3{
+    margin-top:5px;
+    color:#315a8a;
+}
+
+.card p:last-child{
+    margin-bottom:0;
+}
+
+/* =========================
+   INFORMACIÓN
+========================= */
+
+.info{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+    gap:15px;
+}
+
+.box{
+    background:linear-gradient(145deg,#f5f1ff,#eef8ff);
+    border-radius:16px;
+    padding:18px;
+    border:1px solid #e2e7f5;
+    transition:.2s;
+}
+
+.box:hover{
+    transform:translateY(-3px);
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.form-group{
+    margin-bottom:16px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+input{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid #cbd5e1;
+    border-radius:12px;
+    font-size:16px;
+    outline:none;
+    background:#fff;
+    transition:.2s;
+}
+
+input:focus{
+    border-color:#7659ed;
+    box-shadow:0 0 0 3px rgba(118,89,237,.12);
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+button{
+    border:0;
+    border-radius:13px;
+    padding:14px 18px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.2s;
+}
+
+button:hover{
+    transform:translateY(-1px);
+}
+
+.btn-principal{
+    width:100%;
+    color:white;
+    background:linear-gradient(135deg,#6548e8,#39bdf8);
+    box-shadow:0 6px 16px rgba(91,69,201,.25);
+}
+
+.btn-secundario{
+    color:#4c3cb1;
+    background:#eeeaff;
+}
+
+.botones{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:15px;
+}
+
+/* =========================
+   PASE DIGITAL
+========================= */
+
+.carnet{
+    display:none;
+    margin-top:25px;
+    border-radius:22px;
+    overflow:hidden;
+    background:white;
+    border:2px solid #7659ed;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    animation:aparecer .4s ease;
+}
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.carnet-header{
+    background:linear-gradient(135deg,#6548e8,#39bdf8);
+    color:white;
+    text-align:center;
+    padding:24px 18px;
+}
+
+.carnet-header .institucion{
+    font-size:14px;
+    font-weight:bold;
+    letter-spacing:.4px;
+}
+
+.carnet-header h2{
+    color:white;
+    margin:8px 0;
+    font-size:28px;
+}
+
+.prototipo{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    background:rgba(255,255,255,.2);
+    font-size:12px;
+    margin-top:4px;
+}
+
+.carnet-body{
+    padding:24px;
+}
+
+.dato{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
+    padding:12px 0;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.dato strong{
+    min-width:125px;
+}
+
+.estado{
+    margin-top:18px;
+    background:#dcfce7;
+    color:#166534;
+    padding:12px;
+    border-radius:12px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.numero{
+    margin-top:15px;
+    padding:10px;
+    background:#f1f5f9;
+    border-radius:10px;
+    text-align:center;
+    font-size:13px;
+    color:#475569;
+}
+
+.aviso{
+    font-size:12px;
+    color:#64748b;
+    text-align:center;
+    margin-top:18px;
+}
+
+/* =========================
+   ALERTA
+========================= */
+
+.alerta{
+    display:none;
+    background:#fee2e2;
+    color:#991b1b;
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:16px;
+    font-weight:bold;
+}
+
+/* =========================
+   PIE DE PÁGINA
+========================= */
+
+footer{
+    text-align:center;
+    padding:30px 18px;
+    color:#64748b;
+    font-size:14px;
+}
+
+/* =========================
+   MODO IMPRESIÓN
+========================= */
+
+@media print{
+
+    body{
+        background:white;
+    }
+
+    header,
+    main > .card:not(:last-child),
+    footer,
+    .formulario,
+    .botones{
+        display:none !important;
+    }
+
+    main{
+        width:100%;
+        margin:0;
+    }
+
+    .card{
+        box-shadow:none;
+        border:0;
+        margin:0;
+        padding:0;
+    }
+
+    .carnet{
+        display:block !important;
+        box-shadow:none;
+        border:2px solid #6548e8;
+    }
+
+    .aviso{
+        color:#333;
+    }
+}
+
+/* =========================
+   CELULARES
+========================= */
+
+@media(max-width:600px){
+
+    header{
+        padding:32px 15px 38px;
+    }
+
+    .card{
+        padding:20px;
+        border-radius:17px;
+    }
+
+    .card h2{
+        font-size:21px;
+    }
+
+    .botones{
+        grid-template-columns:1fr;
+    }
+
+    .dato{
+        display:block;
+    }
+
+    .dato strong{
+        display:block;
+        margin-bottom:3px;
+    }
+}
+
 </style>
 </head>
+
 <body>
+
+<!-- =========================
+     ENCABEZADO
+========================= -->
+
 <header>
-<div style="font-size:18px">📱 Maldonado Conecta</div>
-<h1>📢 Consejo Estudiantil 2026-2027</h1>
-<div class="slogan">Tecnología que informa, conecta y genera oportunidades.</div>
+
+    <div class="logo">
+        📱 Maldonado Conecta
+    </div>
+
+    <h1>
+        📢 Consejo Estudiantil 2026-2027
+    </h1>
+
+    <div class="slogan">
+        Tecnología que informa, conecta y genera oportunidades.
+    </div>
+
 </header>
+
+
 <main>
+
+<!-- =========================
+     PRESENTACIÓN
+========================= -->
+
 <section class="card">
-<h2>Consejo Estudiantil 2026-2027</h2>
-<p><strong>📅 Fecha de inicio:</strong> lunes 5 de octubre de 2026.</p>
-<p><strong>📍 Lugar:</strong> Colegio Pedro Vicente Maldonado.</p>
+
+    <h2>
+        Consejo Estudiantil 2026-2027
+    </h2>
+
+    <p>
+        <strong>📅 Fecha de inicio:</strong>
+        lunes 5 de octubre de 2026.
+    </p>
+
+    <p>
+        <strong>📍 Lugar:</strong>
+        Colegio Pedro Vicente Maldonado.
+    </p>
+
 </section>
+
+
+<!-- =========================
+     INFORMACIÓN
+========================= -->
+
 <section class="card">
-<h2>Información</h2>
-<div class="info">
-<div class="box"><h3>📅 Fecha</h3><p>Lunes 5 de octubre de 2026.</p></div>
-<div class="box"><h3>🏫 Lugar</h3><p>Colegio Pedro Vicente Maldonado.</p></div>
-<div class="box"><h3>🗳️ Actividad</h3><p>Consejo Estudiantil 2026-2027.</p></div>
-</div>
+
+    <h2>
+        ℹ️ Información
+    </h2>
+
+    <div class="info">
+
+        <div class="box">
+
+            <h3>📅 Fecha</h3>
+
+            <p>
+                Lunes 5 de octubre de 2026.
+            </p>
+
+        </div>
+
+
+        <div class="box">
+
+            <h3>🏫 Lugar</h3>
+
+            <p>
+                Colegio Pedro Vicente Maldonado.
+            </p>
+
+        </div>
+
+
+        <div class="box">
+
+            <h3>🗳️ Actividad</h3>
+
+            <p>
+                Consejo Estudiantil 2026-2027.
+            </p>
+
+        </div>
+
+    </div>
+
 </section>
+
+
+<!-- =========================
+     PROYECTO
+========================= -->
+
 <section class="card">
-<h2>🌱 Nuestro proyecto</h2>
-<p>Maldonado Conecta es una propuesta digital para facilitar el acceso a información de interés para la comunidad educativa mediante códigos QR y una plataforma informativa.</p>
-<p><strong>Nota:</strong> Esta página es un prototipo escolar. Las fechas y actividades oficiales deben confirmarse con la institución educativa.</p>
+
+    <h2>
+        🌱 Nuestro proyecto
+    </h2>
+
+    <p>
+        <strong>Maldonado Conecta</strong> es una propuesta digital
+        orientada a facilitar el acceso a información de interés
+        para la comunidad educativa mediante códigos QR y una
+        plataforma informativa.
+    </p>
+
+    <p>
+        El proyecto busca integrar herramientas digitales para
+        mejorar la comunicación y presentar información de forma
+        sencilla y accesible.
+    </p>
+
 </section>
+
+
+<!-- =========================
+     PASE DIGITAL
+========================= -->
+
+<section class="card formulario">
+
+    <h2>
+        🎫 Pase Digital de Autorización
+    </h2>
+
+    <p>
+        Genera un pase digital para fines demostrativos del
+        prototipo escolar.
+    </p>
+
+
+    <div class="alerta" id="alerta"></div>
+
+
+    <div class="form-group">
+
+        <label for="nombre">
+            👤 Nombre del estudiante
+        </label>
+
+        <input
+            type="text"
+            id="nombre"
+            placeholder="Ej. Sebastián Guaman"
+            maxlength="80"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="curso">
+            🎓 Curso / Paralelo
+        </label>
+
+        <input
+            type="text"
+            id="curso"
+            placeholder="Ej. Segundo BGU B"
+            maxlength="50"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="fecha">
+            📅 Fecha
+        </label>
+
+        <input
+            type="date"
+            id="fecha"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="salida">
+            ⏰ Hora de salida
+        </label>
+
+        <input
+            type="time"
+            id="salida"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="regreso">
+            ⏰ Hora de regreso
+        </label>
+
+        <input
+            type="time"
+            id="regreso"
+        >
+
+    </div>
+
+
+    <div class="form-group">
+
+        <label for="motivo">
+            📝 Motivo
+        </label>
+
+        <input
+            type="text"
+            id="motivo"
+            placeholder="Ej. Actividad académica"
+            maxlength="120"
+        >
+
+    </div>
+
+
+    <button
+        class="btn-principal"
+        onclick="generarPase()"
+    >
+        🎫 Generar pase digital
+    </button>
+
+
+    <!-- =========================
+         PASE GENERADO
+    ========================= -->
+
+    <div class="carnet" id="carnet">
+
+        <div class="carnet-header">
+
+            <div class="institucion">
+                🏫 COLEGIO PEDRO VICENTE MALDONADO
+            </div>
+
+            <h2>
+                🎫 PASE DIGITAL
+            </h2>
+
+            <div class="prototipo">
+                PROTOTIPO ESCOLAR
+            </div>
+
+        </div>
+
+
+        <div class="carnet-body">
+
+
+            <div class="dato">
+
+                <strong>
+                    👤 Estudiante:
+                </strong>
+
+                <span id="mostrarNombre"></span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>
+                    🎓 Curso:
+                </strong>
+
+                <span id="mostrarCurso"></span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>
+                    📅 Fecha:
+                </strong>
+
+                <span id="mostrarFecha"></span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>
+                    ⏰ Salida:
+                </strong>
+
+                <span id="mostrarSalida"></span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>
+                    ⏰ Regreso:
+                </strong>
+
+                <span id="mostrarRegreso"></span>
+
+            </div>
+
+
+            <div class="dato">
+
+                <strong>
+                    📝 Motivo:
+                </strong>
+
+                <span id="mostrarMotivo"></span>
+
+            </div>
+
+
+            <div class="estado">
+                🟢 PASE GENERADO — PROTOTIPO
+            </div>
+
+
+            <div class="numero">
+
+                🔢 Número de pase:
+                <strong id="numeroPase"></strong>
+
+            </div>
+
+
+            <p class="aviso">
+
+                ⚠️ Este pase forma parte de un prototipo escolar
+                de Maldonado Conecta y no reemplaza una autorización
+                oficial de la institución.
+
+            </p>
+
+
+            <div class="botones">
+
+                <button
+                    class="btn-principal"
+                    onclick="imprimirPase()"
+                >
+                    🖨️ Imprimir pase
+                </button>
+
+                <button
+                    class="btn-secundario"
+                    onclick="nuevoPase()"
+                >
+                    🔄 Generar otro
+                </button>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
 </main>
-<footer>Maldonado Conecta · Prototipo de emprendimiento social sostenible · 2026</footer>
+
+
+<!-- =========================
+     PIE DE PÁGINA
+========================= -->
+
+<footer>
+
+    Maldonado Conecta · Prototipo de emprendimiento social sostenible · 2026
+
+</footer>
+
+
+<script>
+
+/* =========================
+   MOSTRAR ALERTA
+========================= */
+
+function mostrarAlerta(mensaje){
+
+    const alerta = document.getElementById("alerta");
+
+    alerta.textContent = mensaje;
+
+    alerta.style.display = "block";
+
+}
+
+
+/* =========================
+   OCULTAR ALERTA
+========================= */
+
+function ocultarAlerta(){
+
+    const alerta = document.getElementById("alerta");
+
+    alerta.style.display = "none";
+
+}
+
+
+/* =========================
+   FORMATO DE FECHA
+========================= */
+
+function formatearFecha(fecha){
+
+    const partes = fecha.split("-");
+
+    if(partes.length !== 3){
+        return fecha;
+    }
+
+    const fechaLocal = new Date(
+        Number(partes[0]),
+        Number(partes[1]) - 1,
+        Number(partes[2])
+    );
+
+    return fechaLocal.toLocaleDateString(
+        "es-EC",
+        {
+            weekday:"long",
+            year:"numeric",
+            month:"long",
+            day:"numeric"
+        }
+    );
+
+}
+
+
+/* =========================
+   GENERAR NÚMERO DE PASE
+========================= */
+
+function generarNumeroPase(){
+
+    const ahora = new Date();
+
+    const fecha =
+        ahora.getFullYear().toString() +
+        String(ahora.getMonth()+1).padStart(2,"0") +
+        String(ahora.getDate()).padStart(2,"0");
+
+    const hora =
+        String(ahora.getHours()).padStart(2,"0") +
+        String(ahora.getMinutes()).padStart(2,"0") +
+        String(ahora.getSeconds()).padStart(2,"0");
+
+    const aleatorio =
+        Math.floor(100 + Math.random() * 900);
+
+    return "MC-" + fecha + "-" + hora + "-" + aleatorio;
+
+}
+
+
+/* =========================
+   GENERAR PASE
+========================= */
+
+function generarPase(){
+
+    ocultarAlerta();
+
+
+    const nombre =
+        document.getElementById("nombre").value.trim();
+
+    const curso =
+        document.getElementById("curso").value.trim();
+
+    const fecha =
+        document.getElementById("fecha").value;
+
+    const salida =
+        document.getElementById("salida").value;
+
+    const regreso =
+        document.getElementById("regreso").value;
+
+    const motivo =
+        document.getElementById("motivo").value.trim();
+
+
+    /* Validación */
+
+    if(
+        nombre === "" ||
+        curso === "" ||
+        fecha === "" ||
+        salida === "" ||
+        regreso === "" ||
+        motivo === ""
+    ){
+
+        mostrarAlerta(
+            "Por favor completa todos los campos."
+        );
+
+        return;
+    }
+
+
+    /* Validar horario */
+
+    if(regreso <= salida){
+
+        mostrarAlerta(
+            "La hora de regreso debe ser posterior a la hora de salida."
+        );
+
+        return;
+    }
+
+
+    /* Mostrar información */
+
+    document.getElementById(
+        "mostrarNombre"
+    ).textContent = nombre;
+
+
+    document.getElementById(
+        "mostrarCurso"
+    ).textContent = curso;
+
+
+    document.getElementById(
+        "mostrarFecha"
+    ).textContent = formatearFecha(fecha);
+
+
+    document.getElementById(
+        "mostrarSalida"
+    ).textContent = salida;
+
+
+    document.getElementById(
+        "mostrarRegreso"
+    ).textContent = regreso;
+
+
+    document.getElementById(
+        "mostrarMotivo"
+    ).textContent = motivo;
+
+
+    document.getElementById(
+        "numeroPase"
+    ).textContent = generarNumeroPase();
+
+
+    /* Mostrar pase */
+
+    const carnet =
+        document.getElementById("carnet");
+
+    carnet.style.display = "block";
+
+
+    /* Desplazar hacia el pase */
+
+    carnet.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+    });
+
+}
+
+
+/* =========================
+   IMPRIMIR
+========================= */
+
+function imprimirPase(){
+
+    window.print();
+
+}
+
+
+/* =========================
+   NUEVO PASE
+========================= */
+
+function nuevoPase(){
+
+    document.getElementById("nombre").value = "";
+    document.getElementById("curso").value = "";
+    document.getElementById("fecha").value = "";
+    document.getElementById("salida").value = "";
+    document.getElementById("regreso").value = "";
+    document.getElementById("motivo").value = "";
+
+    document.getElementById("carnet").style.display = "none";
+
+    ocultarAlerta();
+
+    window.scrollTo({
+        top:document.querySelector(".formulario").offsetTop - 15,
+        behavior:"smooth"
+    });
+
+}
+
+</script>
+
 </body>
 </html>
