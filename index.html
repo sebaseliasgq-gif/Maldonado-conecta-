@@ -1,882 +1,463 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Maldonado Conecta - Consejo Estudiantil 2026-2027</title>
-
-  <!-- Librería para generar códigos QR -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #f4f6fb;
-      color: #20243a;
-      line-height: 1.6;
-    }
-
-    header {
-      background: linear-gradient(135deg, #5b21b6, #2563eb);
-      color: white;
-      text-align: center;
-      padding: 55px 20px;
-    }
-
-    header h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 18px;
-      opacity: 0.95;
-    }
-
-    .container {
-      width: 92%;
-      max-width: 1050px;
-      margin: 35px auto;
-    }
-
-    .section {
-      background: white;
-      border-radius: 20px;
-      padding: 30px;
-      margin-bottom: 25px;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
-    }
-
-    .section h2 {
-      color: #4c1d95;
-      margin-bottom: 18px;
-      font-size: 28px;
-    }
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .info-card {
-      background: #f8f7ff;
-      border: 1px solid #e7e3ff;
-      border-radius: 16px;
-      padding: 22px;
-      text-align: center;
-    }
-
-    .info-card .icon {
-      font-size: 34px;
-      margin-bottom: 8px;
-    }
-
-    .info-card h3 {
-      color: #4c1d95;
-      margin-bottom: 8px;
-    }
-
-    .project-box {
-      background: linear-gradient(135deg, #f5f3ff, #eff6ff);
-      border-left: 5px solid #5b21b6;
-      padding: 22px;
-      border-radius: 12px;
-    }
-
-    form {
-      display: grid;
-      gap: 18px;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 18px;
-    }
-
-    .field {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .field.full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      font-weight: bold;
-      margin-bottom: 7px;
-      color: #33364d;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 13px 14px;
-      border: 1px solid #d4d7e2;
-      border-radius: 10px;
-      font-size: 16px;
-      outline: none;
-      transition: 0.2s;
-      background: white;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: #6366f1;
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
-    }
-
-    textarea {
-      min-height: 100px;
-      resize: vertical;
-    }
-
-    .main-button {
-      border: none;
-      border-radius: 12px;
-      padding: 15px 20px;
-      font-size: 17px;
-      font-weight: bold;
-      cursor: pointer;
-      background: linear-gradient(135deg, #5b21b6, #2563eb);
-      color: white;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-
-    .main-button:hover {
-      transform: translateY(-1px);
-      opacity: 0.95;
-    }
-
-    .secondary-button {
-      border: 2px solid #5b21b6;
-      border-radius: 12px;
-      padding: 13px 18px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      background: white;
-      color: #5b21b6;
-    }
-
-    .alert {
-      display: none;
-      padding: 14px;
-      border-radius: 10px;
-      background: #fff4f4;
-      color: #a61b1b;
-      border: 1px solid #ffcaca;
-      margin-bottom: 15px;
-    }
-
-    /* =========================
-       PASE DIGITAL
-    ========================== */
-
-    #passSection {
-      display: none;
-    }
-
-    .digital-pass {
-      max-width: 700px;
-      margin: 0 auto;
-      border: 3px solid #5b21b6;
-      border-radius: 22px;
-      overflow: hidden;
-      background: white;
-    }
-
-    .pass-header {
-      background: linear-gradient(135deg, #5b21b6, #2563eb);
-      color: white;
-      padding: 25px;
-      text-align: center;
-    }
-
-    .pass-header h2 {
-      color: white;
-      margin-bottom: 5px;
-    }
-
-    .pass-header p {
-      opacity: 0.95;
-    }
-
-    .pass-body {
-      padding: 25px;
-    }
-
-    .pass-number {
-      text-align: center;
-      background: #f3f4ff;
-      padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-      font-weight: bold;
-      color: #4c1d95;
-    }
-
-    .pass-data {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-
-    .data-item {
-      background: #f8f9fc;
-      border-radius: 10px;
-      padding: 13px;
-      border: 1px solid #e5e7eb;
-    }
-
-    .data-item strong {
-      display: block;
-      color: #4c1d95;
-      margin-bottom: 3px;
-      font-size: 14px;
-    }
-
-    .qr-area {
-      text-align: center;
-      padding: 25px 10px 10px;
-    }
-
-    .qr-area h3 {
-      color: #4c1d95;
-      margin-bottom: 12px;
-    }
-
-    #qrcode {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 220px;
-    }
-
-    #qrcode img,
-    #qrcode canvas {
-      margin: auto;
-      max-width: 220px;
-      height: auto !important;
-    }
-
-    .qr-text {
-      margin-top: 12px;
-      color: #555;
-      font-size: 13px;
-    }
-
-    .status {
-      text-align: center;
-      margin-top: 20px;
-      padding: 13px;
-      background: #ecfdf5;
-      border: 1px solid #a7f3d0;
-      color: #047857;
-      border-radius: 10px;
-      font-weight: bold;
-    }
-
-    .pass-actions {
-      display: flex;
-      gap: 12px;
-      justify-content: center;
-      margin-top: 22px;
-      flex-wrap: wrap;
-    }
-
-    .disclaimer {
-      margin-top: 18px;
-      padding: 14px;
-      background: #fff8e7;
-      border: 1px solid #f6d98b;
-      border-radius: 10px;
-      font-size: 13px;
-      color: #725b18;
-      text-align: center;
-    }
-
-    footer {
-      background: #17152a;
-      color: white;
-      text-align: center;
-      padding: 25px 15px;
-      margin-top: 40px;
-    }
-
-    /* =========================
-       IMPRESIÓN
-    ========================== */
-
-    @media print {
-
-      @page {
-        size: A4;
-        margin: 12mm;
-      }
-
-      body {
-        background: white !important;
-        color: black !important;
-      }
-
-      body * {
-        visibility: hidden;
-      }
-
-      #passSection,
-      #passSection * {
-        visibility: visible;
-      }
-
-      #passSection {
-        display: block !important;
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        margin: 0;
-        padding: 0;
-      }
-
-      .section {
-        box-shadow: none !important;
-        border: none !important;
-        padding: 0 !important;
-        margin: 0 !important;
-      }
-
-      .digital-pass {
-        max-width: 100%;
-        width: 100%;
-        border: 2px solid #333;
-        box-shadow: none;
-        margin: 0 auto;
-      }
-
-      .pass-header {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-      }
-
-      .status {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
-      }
-
-      .pass-actions,
-      .disclaimer,
-      .no-print {
-        display: none !important;
-      }
-
-      #qrcode img,
-      #qrcode canvas {
-        width: 220px !important;
-        height: 220px !important;
-        display: block !important;
-        margin: auto !important;
-      }
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================== */
-
-    @media (max-width: 750px) {
-
-      header h1 {
-        font-size: 31px;
-      }
-
-      header p {
-        font-size: 16px;
-      }
-
-      .info-grid,
-      .form-grid,
-      .pass-data {
-        grid-template-columns: 1fr;
-      }
-
-      .field.full {
-        grid-column: auto;
-      }
-
-      .section {
-        padding: 20px;
-      }
-
-      .section h2 {
-        font-size: 24px;
-      }
-
-      .digital-pass {
-        border-radius: 15px;
-      }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Maldonado Conecta</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6fb;
+  color: #222;
+}
+
+header {
+  background: linear-gradient(135deg, #5424a8, #1769aa);
+  color: white;
+  padding: 45px 20px;
+  text-align: center;
+}
+
+header h1 {
+  margin: 0 0 10px;
+  font-size: 36px;
+}
+
+header p {
+  margin: 6px 0;
+}
+
+.container {
+  width: 92%;
+  max-width: 900px;
+  margin: 30px auto;
+}
+
+.card {
+  background: white;
+  padding: 25px;
+  margin-bottom: 25px;
+  border-radius: 16px;
+  box-shadow: 0 5px 18px rgba(0,0,0,.08);
+}
+
+h2 {
+  color: #5424a8;
+}
+
+.info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+}
+
+.info-box {
+  background: #f1efff;
+  padding: 18px;
+  border-radius: 12px;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  margin-top: 7px;
+  border: 1px solid #ccc;
+  border-radius: 9px;
+  font-size: 16px;
+}
+
+button {
+  border: none;
+  border-radius: 10px;
+  padding: 14px 20px;
+  margin-top: 20px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #5424a8;
+  color: white;
+}
+
+button:hover {
+  opacity: .9;
+}
+
+.secondary {
+  background: #1769aa;
+  margin-left: 8px;
+}
+
+#resultado {
+  display: none;
+}
+
+.pase {
+  border: 3px solid #5424a8;
+  border-radius: 15px;
+  padding: 25px;
+  background: white;
+}
+
+.pase-header {
+  text-align: center;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 15px;
+}
+
+.pase-header h2 {
+  margin: 5px 0;
+}
+
+.dato {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.estado {
+  margin-top: 20px;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  background: #e7f7ed;
+  color: #18753a;
+  font-weight: bold;
+}
+
+.qr-container {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.qr-container img {
+  width: 220px;
+  height: 220px;
+  max-width: 100%;
+  border: 8px solid white;
+}
+
+.aviso {
+  background: #fff4d6;
+  color: #725500;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+footer {
+  text-align: center;
+  padding: 30px;
+  color: #666;
+}
+
+@media(max-width:600px) {
+  header h1 {
+    font-size: 28px;
+  }
+
+  .secondary {
+    margin-left: 0;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+
+/* IMPRESIÓN */
+@media print {
+  body {
+    background: white;
+  }
+
+  body * {
+    visibility: hidden;
+  }
+
+  #resultado,
+  #resultado * {
+    visibility: visible;
+  }
+
+  #resultado {
+    display: block !important;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .pase {
+    box-shadow: none;
+    border: 2px solid #000;
+  }
+}
+</style>
 </head>
 
 <body>
 
-  <!-- =========================
-       ENCABEZADO
-  ========================== -->
+<header>
+  <h1>🏫 Maldonado Conecta</h1>
+  <p>Consejo Estudiantil 2026-2027</p>
+  <p>Colegio Pedro Vicente Maldonado</p>
+</header>
 
-  <header>
-    <h1>🌐 Maldonado Conecta</h1>
-    <p>Consejo Estudiantil 2026-2027</p>
-  </header>
+<div class="container">
 
-  <main class="container">
+  <section class="card">
+    <h2>📅 Información</h2>
 
-    <!-- INFORMACIÓN -->
+    <div class="info">
 
-    <section class="section">
-      <h2>📚 Consejo Estudiantil 2026-2027</h2>
-
-      <div class="info-grid">
-
-        <div class="info-card">
-          <div class="icon">📅</div>
-          <h3>Fecha de inicio</h3>
-          <p>Lunes 5 de octubre de 2026</p>
-        </div>
-
-        <div class="info-card">
-          <div class="icon">🏫</div>
-          <h3>Lugar</h3>
-          <p>Colegio Pedro Vicente Maldonado</p>
-        </div>
-
-        <div class="info-card">
-          <div class="icon">💻</div>
-          <h3>Actividad</h3>
-          <p>Maldonado Conecta</p>
-        </div>
-
+      <div class="info-box">
+        <strong>Fecha de inicio</strong>
+        <p>Lunes 5 de octubre de 2026</p>
       </div>
-    </section>
 
-    <!-- PROYECTO -->
+      <div class="info-box">
+        <strong>Lugar</strong>
+        <p>Colegio Pedro Vicente Maldonado</p>
+      </div>
 
-    <section class="section">
-      <h2>🚀 Nuestro proyecto</h2>
+      <div class="info-box">
+        <strong>Proyecto</strong>
+        <p>Pase Digital de Autorización</p>
+      </div>
 
-      <div class="project-box">
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>💡 Nuestro proyecto</h2>
+
+    <p>
+      Maldonado Conecta es una propuesta digital del Consejo Estudiantil
+      para facilitar procesos escolares mediante herramientas digitales
+      y códigos QR.
+    </p>
+
+    <p>
+      El siguiente formulario genera un pase digital demostrativo.
+    </p>
+  </section>
+
+  <section class="card">
+    <h2>🎫 Generar Pase Digital</h2>
+
+    <form id="formulario">
+
+      <label for="nombre">Nombre del estudiante</label>
+      <input id="nombre" type="text" required>
+
+      <label for="curso">Curso</label>
+      <input id="curso" type="text" required>
+
+      <label for="fecha">Fecha</label>
+      <input id="fecha" type="date" required>
+
+      <label for="salida">Hora de salida</label>
+      <input id="salida" type="time" required>
+
+      <label for="regreso">Hora de regreso</label>
+      <input id="regreso" type="time" required>
+
+      <label for="motivo">Motivo</label>
+      <textarea id="motivo" rows="3" required></textarea>
+
+      <button type="submit">✅ Generar pase</button>
+
+    </form>
+  </section>
+
+  <section class="card" id="resultado">
+
+    <div class="pase">
+
+      <div class="pase-header">
+        <h2>🎫 PASE DIGITAL</h2>
+        <strong>MALDONADO CONECTA</strong>
+        <p>Consejo Estudiantil 2026-2027</p>
+      </div>
+
+      <div class="dato">
+        <strong>Número de pase:</strong>
+        <span id="numero"></span>
+      </div>
+
+      <div class="dato">
+        <strong>Estudiante:</strong>
+        <span id="rNombre"></span>
+      </div>
+
+      <div class="dato">
+        <strong>Curso:</strong>
+        <span id="rCurso"></span>
+      </div>
+
+      <div class="dato">
+        <strong>Fecha:</strong>
+        <span id="rFecha"></span>
+      </div>
+
+      <div class="dato">
+        <strong>Salida:</strong>
+        <span id="rSalida"></span>
+      </div>
+
+      <div class="dato">
+        <strong>Regreso:</strong>
+        <span id="rRegreso"></span>
+      </div>
+
+      <div class="dato">
+        <strong>Motivo:</strong>
+        <span id="rMotivo"></span>
+      </div>
+
+      <div class="estado">
+        🟢 PASE GENERADO — PROTOTIPO
+      </div>
+
+      <div class="qr-container">
+        <h3>📱 Código QR</h3>
+
+        <img id="codigoQR"
+             alt="Código QR del pase">
+
         <p>
-          Maldonado Conecta es una propuesta digital para facilitar la
-          comunicación y organización de los estudiantes mediante herramientas
-          tecnológicas, códigos QR y plataformas digitales.
+          Escanea este código para consultar los datos del pase.
         </p>
       </div>
-    </section>
 
-    <!-- FORMULARIO -->
-
-    <section class="section">
-      <h2>🎫 Pase Digital de Autorización</h2>
-
-      <p style="margin-bottom: 20px;">
-        Completa los datos para generar tu pase digital.
-      </p>
-
-      <div id="alert" class="alert"></div>
-
-      <form id="passForm">
-
-        <div class="form-grid">
-
-          <div class="field">
-            <label for="nombre">Nombre completo</label>
-            <input
-              type="text"
-              id="nombre"
-              placeholder="Ej. Juan Pérez"
-              required
-            >
-          </div>
-
-          <div class="field">
-            <label for="curso">Curso</label>
-            <input
-              type="text"
-              id="curso"
-              placeholder="Ej. 2.º BGU A"
-              required
-            >
-          </div>
-
-          <div class="field">
-            <label for="fecha">Fecha de salida</label>
-            <input
-              type="date"
-              id="fecha"
-              required
-            >
-          </div>
-
-          <div class="field">
-            <label for="horaSalida">Hora de salida</label>
-            <input
-              type="time"
-              id="horaSalida"
-              required
-            >
-          </div>
-
-          <div class="field">
-            <label for="horaRegreso">Hora de regreso</label>
-            <input
-              type="time"
-              id="horaRegreso"
-              required
-            >
-          </div>
-
-          <div class="field full">
-            <label for="motivo">Motivo de salida</label>
-            <textarea
-              id="motivo"
-              placeholder="Escribe el motivo de la salida..."
-              required
-            ></textarea>
-          </div>
-
-        </div>
-
-        <button type="submit" class="main-button">
-          🎫 Generar Pase Digital
-        </button>
-
-      </form>
-    </section>
-
-    <!-- =========================
-         PASE GENERADO
-    ========================== -->
-
-    <section class="section" id="passSection">
-
-      <div class="digital-pass">
-
-        <div class="pass-header">
-          <h2>🎫 PASE DIGITAL</h2>
-          <p>Maldonado Conecta</p>
-          <p>Consejo Estudiantil 2026-2027</p>
-        </div>
-
-        <div class="pass-body">
-
-          <div class="pass-number">
-            N.º DE PASE:
-            <span id="passNumber"></span>
-          </div>
-
-          <div class="pass-data">
-
-            <div class="data-item">
-              <strong>👤 Estudiante</strong>
-              <span id="passNombre"></span>
-            </div>
-
-            <div class="data-item">
-              <strong>🏫 Curso</strong>
-              <span id="passCurso"></span>
-            </div>
-
-            <div class="data-item">
-              <strong>📅 Fecha</strong>
-              <span id="passFecha"></span>
-            </div>
-
-            <div class="data-item">
-              <strong>🚪 Hora de salida</strong>
-              <span id="passSalida"></span>
-            </div>
-
-            <div class="data-item">
-              <strong>🔙 Hora de regreso</strong>
-              <span id="passRegreso"></span>
-            </div>
-
-            <div class="data-item">
-              <strong>📝 Motivo</strong>
-              <span id="passMotivo"></span>
-            </div>
-
-          </div>
-
-          <!-- QR -->
-
-          <div class="qr-area">
-
-            <h3>📱 Código QR del Pase</h3>
-
-            <div id="qrcode"></div>
-
-            <p class="qr-text">
-              Escanea este código para consultar los datos de este pase.
-            </p>
-
-          </div>
-
-          <div class="status">
-            🟢 PASE GENERADO — PROTOTIPO
-          </div>
-
-          <div class="disclaimer">
-            ⚠️ Este pase es un prototipo escolar y no reemplaza
-            una autorización oficial del establecimiento.
-          </div>
-
-          <div class="pass-actions no-print">
-
-            <button
-              type="button"
-              class="main-button"
-              onclick="imprimirPase()"
-            >
-              🖨️ Imprimir Pase
-            </button>
-
-            <button
-              type="button"
-              class="secondary-button"
-              onclick="generarOtro()"
-            >
-              🔄 Generar otro
-            </button>
-
-          </div>
-
-        </div>
+      <div class="aviso">
+        ⚠️ Este pase es únicamente un prototipo demostrativo
+        para el proyecto Maldonado Conecta.
+        No reemplaza una autorización oficial del colegio.
       </div>
 
-    </section>
+    </div>
 
-  </main>
+    <div class="no-print">
+      <button onclick="window.print()">🖨️ Imprimir pase</button>
+      <button class="secondary" onclick="nuevoPase()">🔄 Generar otro</button>
+    </div>
 
-  <footer>
-    <p>
-      © 2026 Maldonado Conecta — Colegio Pedro Vicente Maldonado
-    </p>
-    <p>
-      Consejo Estudiantil 2026-2027
-    </p>
-  </footer>
+  </section>
 
+</div>
 
-  <script>
+<footer>
+  Maldonado Conecta © 2026-2027
+</footer>
 
-    const form = document.getElementById("passForm");
-    const alertBox = document.getElementById("alert");
+<script>
+const formulario = document.getElementById("formulario");
+const resultado = document.getElementById("resultado");
 
-    form.addEventListener("submit", function(event) {
+formulario.addEventListener("submit", function(event) {
 
-      event.preventDefault();
+  event.preventDefault();
 
-      const nombre = document.getElementById("nombre").value.trim();
-      const curso = document.getElementById("curso").value.trim();
-      const fecha = document.getElementById("fecha").value;
-      const horaSalida = document.getElementById("horaSalida").value;
-      const horaRegreso = document.getElementById("horaRegreso").value;
-      const motivo = document.getElementById("motivo").value.trim();
+  const nombre = document.getElementById("nombre").value.trim();
+  const curso = document.getElementById("curso").value.trim();
+  const fecha = document.getElementById("fecha").value;
+  const salida = document.getElementById("salida").value;
+  const regreso = document.getElementById("regreso").value;
+  const motivo = document.getElementById("motivo").value.trim();
 
-      alertBox.style.display = "none";
-      alertBox.textContent = "";
+  if (!nombre || !curso || !fecha || !salida || !regreso || !motivo) {
+    alert("Por favor completa todos los campos.");
+    return;
+  }
 
-      if (
-        !nombre ||
-        !curso ||
-        !fecha ||
-        !horaSalida ||
-        !horaRegreso ||
-        !motivo
-      ) {
-        alertBox.textContent =
-          "Por favor completa todos los campos.";
-        alertBox.style.display = "block";
-        return;
-      }
+  const ahora = new Date();
 
-      /* Comprobar que la hora de regreso sea posterior */
-      if (horaRegreso <= horaSalida) {
-        alertBox.textContent =
-          "La hora de regreso debe ser posterior a la hora de salida.";
-        alertBox.style.display = "block";
-        return;
-      }
+  const numero =
+    "MC-" +
+    ahora.getFullYear() +
+    String(ahora.getMonth() + 1).padStart(2, "0") +
+    String(ahora.getDate()).padStart(2, "0") +
+    "-" +
+    String(ahora.getHours()).padStart(2, "0") +
+    String(ahora.getMinutes()).padStart(2, "0") +
+    String(ahora.getSeconds()).padStart(2, "0");
 
-      /* =========================
-         CREAR NÚMERO DE PASE
-      ========================== */
-
-      const ahora = new Date();
-
-      const numeroPase =
-        "MC-" +
-        ahora.getFullYear() +
-        String(ahora.getMonth() + 1).padStart(2, "0") +
-        String(ahora.getDate()).padStart(2, "0") +
-        "-" +
-        String(ahora.getHours()).padStart(2, "0") +
-        String(ahora.getMinutes()).padStart(2, "0") +
-        String(ahora.getSeconds()).padStart(2, "0");
-
-      /* =========================
-         FORMATEAR FECHA
-      ========================== */
-
-      const fechaObjeto = new Date(fecha + "T00:00:00");
-
-      const fechaFormateada =
-        fechaObjeto.toLocaleDateString("es-EC", {
-          weekday: "long",
-          year: "numeric",
-          month: "long",
-          day: "numeric"
-        });
-
-      /* =========================
-         MOSTRAR DATOS
-      ========================== */
-
-      document.getElementById("passNumber").textContent = numeroPase;
-      document.getElementById("passNombre").textContent = nombre;
-      document.getElementById("passCurso").textContent = curso;
-      document.getElementById("passFecha").textContent = fechaFormateada;
-      document.getElementById("passSalida").textContent = horaSalida;
-      document.getElementById("passRegreso").textContent = horaRegreso;
-      document.getElementById("passMotivo").textContent = motivo;
-
-      /* =========================
-         CREAR DATOS DEL QR
-      ========================== */
-
-      const datosQR =
-`MALDONADO CONECTA
-PASE DIGITAL - PROTOTIPO
-
-Numero de pase: ${numeroPase}
-Estudiante: ${nombre}
-Curso: ${curso}
-Fecha: ${fechaFormateada}
-Hora de salida: ${horaSalida}
-Hora de regreso: ${horaRegreso}
-Motivo: ${motivo}
-
-Este pase es un prototipo escolar y no reemplaza una autorizacion oficial.`;
-
-      /* =========================
-         LIMPIAR QR ANTERIOR
-      ========================== */
-
-      const qrContainer = document.getElementById("qrcode");
-      qrContainer.innerHTML = "";
-
-      /* =========================
-         GENERAR NUEVO QR
-      ========================== */
-
-      if (typeof QRCode !== "undefined") {
-
-        new QRCode(qrContainer, {
-          text: datosQR,
-          width: 220,
-          height: 220,
-          correctLevel: QRCode.CorrectLevel.H
-        });
-
-      } else {
-
-        qrContainer.innerHTML =
-          "<p style='color:red;'>No se pudo cargar el generador QR. Recarga la página.</p>";
-
-      }
-
-      /* Mostrar el pase */
-
-      const passSection = document.getElementById("passSection");
-
-      passSection.style.display = "block";
-
-      setTimeout(function() {
-
-        passSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start"
-        });
-
-      }, 100);
-
+  const fechaBonita = new Date(fecha + "T00:00:00")
+    .toLocaleDateString("es-EC", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
     });
 
+  document.getElementById("numero").textContent = numero;
+  document.getElementById("rNombre").textContent = nombre;
+  document.getElementById("rCurso").textContent = curso;
+  document.getElementById("rFecha").textContent = fechaBonita;
+  document.getElementById("rSalida").textContent = salida;
+  document.getElementById("rRegreso").textContent = regreso;
+  document.getElementById("rMotivo").textContent = motivo;
 
-    /* =========================
-       IMPRIMIR PASE
-    ========================== */
+  /*
+    Datos que se guardarán dentro del QR.
+  */
+  const datosQR =
+    "MALDONADO CONECTA\n" +
+    "PASE: " + numero + "\n" +
+    "ESTUDIANTE: " + nombre + "\n" +
+    "CURSO: " + curso + "\n" +
+    "FECHA: " + fechaBonita + "\n" +
+    "SALIDA: " + salida + "\n" +
+    "REGRESO: " + regreso + "\n" +
+    "MOTIVO: " + motivo;
 
-    function imprimirPase() {
+  /*
+    Generamos el QR mediante un servicio de imagen.
+    Si el servicio no carga, el resto de la página
+    sigue funcionando normalmente.
+  */
+  const qrURL =
+    "https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=" +
+    encodeURIComponent(datosQR);
 
-      const passSection =
-        document.getElementById("passSection");
+  document.getElementById("codigoQR").src = qrURL;
 
-      if (
-        passSection.style.display === "none" ||
-        !document.getElementById("passNumber").textContent
-      ) {
-        alert("Primero debes generar un pase digital.");
-        return;
-      }
+  resultado.style.display = "block";
 
-      /*
-       No abrimos otra ventana.
-       Imprimimos directamente esta página.
-       Esto evita que aparezca una hoja en blanco.
-      */
-
-      window.print();
-    }
+  resultado.scrollIntoView({
+    behavior: "smooth"
+  });
+});
 
 
-    /* =========================
-       GENERAR OTRO PASE
-    ========================== */
+function nuevoPase() {
 
-    function generarOtro() {
+  formulario.reset();
 
-      document.getElementById("passSection").style.display = "none";
+  resultado.style.display = "none";
 
-      document.getElementById("passNumber").textContent = "";
-      document.getElementById("passNombre").textContent = "";
-      document.getElementById("passCurso").textContent = "";
-      document.getElementById("passFecha").textContent = "";
-      document.getElementById("passSalida").textContent = "";
-      document.getElementById("passRegreso").textContent = "";
-      document.getElementById("passMotivo").textContent = "";
-
-      document.getElementById("qrcode").innerHTML = "";
-
-      document.getElementById("passForm").reset();
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-    }
-
-  </script>
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+}
+</script>
 
 </body>
-                               </html>
+</html>
